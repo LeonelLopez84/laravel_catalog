@@ -19,10 +19,10 @@ class CreateClientesTable extends Migration
             $table->increments('ID');
             $table->string('Rfc',13);
             $table->string('RazonSocial',120);
-            $table->string('Telefono',20);
+            $table->string('Telefono',30);
             $table->smallInteger('Status')->default(1);
             $table->smallInteger('Contribuyente');
-            $table->string('CorreoEletronico',100);
+            $table->string('CorreoElectronico',100);
             $table->integer('Estado')->unsigned();
             $table->integer('Pais');
             $table->decimal('LimiteCredito',18,6);
