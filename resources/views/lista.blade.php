@@ -4,7 +4,7 @@
 
 
 @section('content')
-  <table class="table table-striped">
+  <table class="table table-striped" id="myTable">
     <thead>
 	<tr>
 		<th>ID</th>
@@ -14,13 +14,15 @@
 		<th>Contribuyente</th>
 		<th>Estado</th>
 		<th>País</th>
-		<th>Ejecutivo</th>
+	
 	</tr>
 </thead>
 <tbody>
 
 <?php
-foreach($clientes as $val){ ?>
+foreach($clientes as $val){ 
+
+	?>
 <tr>
 	<td><?php echo $val->ID; ?></td>
 	<td><?php echo $val->Rfc; ?></td>
@@ -29,12 +31,10 @@ foreach($clientes as $val){ ?>
 	<td><?php echo $val->Contribuyente ? 'Si' : 'No'; ?></td>
 	<td><?php echo $val->getEstado->Nombre; ?></td>
 	<td><?php echo $val->getPais->Nombre; ?></td>
-	<td><?php echo $val->getEjecutivo->Nombre; ?></td>
 	</tr>
 <?php
 }
 ?>
 	</tbody>
 	</table>
-{{ $clientes->links() }}
 @endsection

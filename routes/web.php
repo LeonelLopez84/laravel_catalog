@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +15,7 @@ Route::get('/', function () {
 });
 
 Route::get('/catalogo','CatalogoController@index');
+
+Route::post('/catalogo/api','CatalogoController@api');
+
+

@@ -3,6 +3,8 @@
 namespace Catalogo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Yajra\Datatables\Facades\Datatables as Datatables;
+use DB;
 use Catalogo\Entities\Ejecutivos  AS Ejecutivos;
 use Catalogo\Entities\Clientes  AS Clientes;
 use Catalogo\Entities\Estados  AS Estados;
@@ -17,9 +19,31 @@ class CatalogoController extends Controller
      */
     public function index()
     {
-        $Clientes = Clientes::paginate(15);
+        $Clientes = Clientes::take(10)->get();
+        
         return view('lista', ['clientes' => $Clientes]);
     
+    }
+
+    public function api()
+    {
+        $model= DB::table('clientes')
+            ->join('estados', 'clientes.Estado', '=', 'estados.ID')
+            ->join('pais', 'clientes.Pais', '=', 'pais.ID')
+            ->join('ejecutivo_ventas', 'clientes.EjecutivoAtiende', '=', 'ejecutivo_ventas.ID')
+            ->select('clientes.ID',
+                    'clientes.Rfc',
+                    'clientes.RazonSocial',
+                    'clientes.Status',
+                    'clientes.Contribuyente',
+                    'estados.Nombre AS Estado',
+                    'Pais.Nombre AS Pais',
+                    'ejecutivo_ventas.Nombre AS Ejecutivo')
+                    ->offset(10)
+                    ->limit(5)->orderBy('clientes.ID', 'ASC');  
+
+        return app('datatables')->queryBuilder($model)->make(true); 
+
     }
 
     /**
