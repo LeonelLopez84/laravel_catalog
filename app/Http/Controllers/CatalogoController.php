@@ -28,19 +28,17 @@ class CatalogoController extends Controller
     public function api()
     {
         $model= DB::table('clientes')
-            ->join('estados', 'clientes.Estado', '=', 'estados.ID')
-            ->join('pais', 'clientes.Pais', '=', 'pais.ID')
-            ->join('ejecutivo_ventas', 'clientes.EjecutivoAtiende', '=', 'ejecutivo_ventas.ID')
-            ->select('clientes.ID',
-                    'clientes.Rfc',
-                    'clientes.RazonSocial',
-                    'clientes.Status',
-                    'clientes.Contribuyente',
+            ->join('estados', 'estados.ID', '=', 'clientes.Estado')
+            ->join('pais', 'Pais.ID', '=', 'estados.Pais')
+            ->join('ejecutivo_ventas', 'ejecutivo_ventas.ID', '=', 'clientes.EjecutivoAtiende')
+            ->select('clientes.ID AS ID',
+                    'clientes.Rfc AS Rfc',
+                    'clientes.RazonSocial AS RazonSocial',
+                    "clientes.Status AS Status",
+                    "clientes.Contribuyente AS Contribuyente",
                     'estados.Nombre AS Estado',
-                    'Pais.Nombre AS Pais',
-                    'ejecutivo_ventas.Nombre AS Ejecutivo')
-                    ->offset(10)
-                    ->limit(5)->orderBy('clientes.ID', 'ASC');  
+                    'pais.Nombre AS Pais',
+                    'ejecutivo_ventas.Nombre AS Ejecutivo');  
 
         return app('datatables')->queryBuilder($model)->make(true); 
 

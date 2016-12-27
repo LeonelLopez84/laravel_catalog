@@ -28,22 +28,54 @@
     <script src="{{ url('//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js') }}"></script>
     <script>
         $(document).ready(function(){
-            $('#myTable').DataTable( {
-                "processing": true,
-                "serverSide": true,
-                "ajax": {
-                    "url": "catalogo/api",
-                    "type": "post"
+            var table=$('#myTable').DataTable( {
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "catalogo/api",
+                    type: "post"
                 },
-                "columns": [
+                columns: [
                     { data: "ID",name:"ID" },
                     { data: "Rfc",name:"Rfc" },
                     { data: "RazonSocial", name:"RazonSocial" },
                     { data: "Status", name:"Status" },
                     { data: "Contribuyente", name:"Contribuyente" },
-                    { data: "Estado", name:"Nombre" },
-                    { data: "Pais", name:"Nombre" },
-                ]
+                    { data: "Estado",name:"Estado"},
+                    { data: "Pais",name:"Pais"},
+                    { data: "Ejecutivo", name:"Ejecutivo"}
+                ],
+                columnDefs: [
+                {
+                    "render": function (data, type, row) {
+                        return (data === 1) ? 'Activo' : 'Inactivo';
+                    },
+                    "targets": 3
+                },
+                {
+                    "render": function (data, type, row) {
+                        return (data === 1) ? 'Sí' : 'No';
+                    },
+                    "targets": 4
+                }
+            ]
+            });
+
+            $('#myTable tfoot th').each( function () {
+                var title = $(this).text();
+                $(this).html( '<input type="text" class="form-control" placeholder="Search '+title+'" />' );
+            });
+
+            table.columns().every( function () {
+            var that = this;
+         
+                $( 'input', this.footer() ).on( 'keyup change', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
             } );
         });    
     </script>
