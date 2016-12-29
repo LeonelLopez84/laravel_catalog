@@ -32,10 +32,8 @@
     <script src="{{ url('https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ url('https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('bower_components/pdfmake/build/pdfmake.min.js') }}"></script>
-
+    <script src="{{ asset('bower_components/pdfmake/build/vfs_fonts.js') }}"></script>
     
-
-
     <script>
         $(document).ready(function(){
             var table=$('#myTable').DataTable( {
@@ -56,7 +54,17 @@
                     { data: "Ejecutivo", name:"Ejecutivo"}
                 ],
                 dom:"Blfrtip",
-                buttons: [{extend:'excelHtml5',text:'Generar Excel',titleAttr:'Excel'}],
+                buttons: [
+                    {
+                        extend: 'pdf',
+                        text: 'Save current page',
+                        exportOptions: {
+                            modifier: {
+                                page: 'current'
+                            }
+                        }
+                    }
+                ],
                 columnDefs: [
                 {
                     "render": function (data, type, row) {
