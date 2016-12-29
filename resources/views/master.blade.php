@@ -33,6 +33,7 @@
     <script src="{{ url('https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('bower_components/pdfmake/build/pdfmake.min.js') }}"></script>
     <script src="{{ asset('bower_components/pdfmake/build/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('bower_components/js-xlsx/dist/xlsx.full.min.js') }}"></script>
     
     <script>
         $(document).ready(function(){
@@ -57,7 +58,15 @@
                 buttons: [
                     {
                         extend: 'pdf',
-                        text: 'Save current page',
+                        text: 'Exportar PDF',
+                        exportOptions: {
+                            modifier: {
+                                page: 'current'
+                            }
+                        }
+                    },
+                    {   extend: 'excelHtml5',
+                        text: 'Exportar a Excel',
                         exportOptions: {
                             modifier: {
                                 page: 'current'
