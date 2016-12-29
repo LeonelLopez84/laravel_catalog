@@ -30,8 +30,10 @@
     <script src="{{ url('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ url('https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ url('https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js') }}"></script>
-    
     <script src="{{ url('https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('bower_components/pdfmake/build/pdfmake.min.js') }}"></script>
+
+    
 
 
     <script>

@@ -29,17 +29,5 @@
 <td></td>
 </tr>
 	</tbody>
-	<tfoot>
-		<tr>
-		<th>ID</th>
-		<th>RFC</th>
-		<th>Razon Social</th>
-		<th>Status</th>
-		<th>Contribuyente</th>
-		<th>Estado</th>
-		<th>Páis</th>
-		<th>Ejecutivo</th>
-	</tr>
-	</tfoot>
 	</table>
 @endsection
