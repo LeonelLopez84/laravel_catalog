@@ -46,7 +46,7 @@
                 },
                 columns: [
                     { data: "ID",name:"ID" },
-                    { data: "Rfc",name:"Rfc" },
+                    { data: "Rfc",name:"Rf" },
                     { data: "RazonSocial", name:"RazonSocial" },
                     { data: "Status", name:"Status" },
                     { data: "Contribuyente", name:"Contribuyente" },
